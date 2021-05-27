@@ -20,11 +20,11 @@
                 $req = $BDD->prepare("SELECT echantillon.nom, analyse.nom, analyse.ph, analyse.calcium, analyse.Mg, analyse.Mn 
                 FROM echantillon, analyse WHERE echantillon.id = analyse.idechantillon");
                 $req->execute();
+
                 $resultat = $req->fetchAll();
                 $req->closeCursor();
 
                 var_dump($resultat);
-
                 echo json_encode($resultat);
             ?>
     </body>
