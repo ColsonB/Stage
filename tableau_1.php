@@ -1,4 +1,10 @@
 <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tableau 1</title>
+        <link rel='stylesheet' type='text/css' href='src/css/style.css'>
+    </head>
     <?php        
            
     /* $req = "SELECT echantillon.nom, analyse.nom, analyse.ph, analyse.calcium, analyse.Mg, analyse.Mn 
@@ -6,7 +12,7 @@
      $result = mysql_query($query); */
      
     ?>
-        <table>
+
     <?php
 
         $analyse = array(
@@ -14,25 +20,14 @@
             "tab2" => array('Ana 2', 'Ph' =>'0', 'Mg' =>'3.2', 'Mn' =>'1')
         );
 
-        foreach ($analyse["tab1"] as $libelle => $i){
-    ?>
-            <tr>
-                <td><?php echo $libelle; ?></td>
-                <td><?php echo $i; ?></td>
-            </tr>
-    <?php
+        foreach ($analyse as $result){
+            if(in_array('0', $result)){
+                echo "***";
+            }
         }
 
-        foreach ($analyse["tab2"] as $libelle => $i){
+        var_dump($analyse);
     ?>
-            <tr>
-                <td><?php echo $libelle; ?></td>
-                <td><?php echo $i; ?></td>
-            </tr>
-    <?php
-        }
-    ?>  
-        </table>
 </html>
 
 
