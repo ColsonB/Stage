@@ -1,0 +1,18 @@
+table {
+    border: 1px solid #333;
+    border-collapse: collapse;
+    width: 1080px;
+    height: 400px;
+}
+
+th {
+    border: 1px solid #333;
+    border-collapse: collapse;
+    text-align: center;
+    width: 200px;
+}
+td {
+    border: 1px solid #333;
+    border-collapse: collapse;
+    text-align: center;
+}
