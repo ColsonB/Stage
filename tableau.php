@@ -5,25 +5,25 @@
         die('Erreur : ' . $e->getMessage());
     }    
            
-    $req = $BDD->prepare("SELECT analyse.analyse, analyse.parametre, analyse.resultat FROM analyse");
+    $req = $BDD->prepare("SELECT analyse.analyse FROM analyse");
     $req->execute();
-     
-    $analyse = array(
-            array("0.1"=>"Ana 1",
-            "0.1.0" => "Ph",
-            "0.1.0.0" => 7,
-        ),
-            array("1.1"=>"Ana 2",
-            "1.1.O" => "Mg",
-            "1.1.0.0" => 3,
-            "1.1.1" => "K",
-            "1.1.1.0" => 5,
-        ),
-    );
+    $analyse = $req->fetchAll(PDO::FETCH_ASSOC);
 
-    foreach($analyse as $resultat){
-      
+    $req1 = $BDD->prepare("SELECT analyse.parametre FROM analyse");
+    $req1->execute();
+    $parametre = $req1->fetchAll(PDO::FETCH_ASSOC);
+
+    $req2 = $BDD->prepare("SELECT analyse.resultat FROM analyse");
+    $req2->execute();
+    $resultat = $req2->fetchAll(PDO::FETCH_ASSOC);
+     
+    for($i=0; $i<count($analyse); $i++){
+        for($z=0; $z<count($parametre); $z++){
+            for($y=0; $y<count($resultat); $y++){
+
+            }
+        }
     }
 
-    var_dump($analyse);
+   var_dump($analyse, $parametre, $resultat);
 ?>
