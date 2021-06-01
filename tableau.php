@@ -5,25 +5,42 @@
         die('Erreur : ' . $e->getMessage());
     }    
            
-    $req = $BDD->prepare("SELECT analyse.analyse FROM analyse");
-    $req->execute();
-    $analyse = $req->fetchAll(PDO::FETCH_ASSOC);
+    $req = sprintf("SELECT analyse.analyse, analyse.parametre, analyse.resultat FROM analyse");
+    //$req->execute();
 
-    $req1 = $BDD->prepare("SELECT analyse.parametre FROM analyse");
-    $req1->execute();
-    $parametre = $req1->fetchAll(PDO::FETCH_ASSOC);
-
-    $req2 = $BDD->prepare("SELECT analyse.resultat FROM analyse");
-    $req2->execute();
-    $resultat = $req2->fetchAll(PDO::FETCH_ASSOC);
-     
-    for($i=0; $i<count($analyse); $i++){
-        for($z=0; $z<count($parametre); $z++){
-            for($y=0; $y<count($resultat); $y++){
-
-            }
-        }
-    }
-
-   var_dump($analyse, $parametre, $resultat);
+    echo sprintf($req);
 ?>
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tableau</title>
+        <link rel='stylesheet' type='text/css' href='src/css/style.css'>
+    </head>
+        <body>
+            <div class="back">
+                <div class="classement">
+                    <table> 
+                        <tr>
+                            <th>Analyse</th>
+                            <th>Paramétre</th>
+                            <th>Résultat</th>  
+                        </tr>
+            
+                        <?php
+                        for($i=0; $tab=$req->fetch(); $i++){
+                        ?>
+                            <tr>
+                                <td><?php echo $tab['analyse']; ?></td>
+                                <td><?php echo $tab['parametre']; ?></td>
+                                <td><?php echo $tab['resultat']; ?></td>
+                            </tr>
+                        <?php
+                        }
+
+                      ?>
+                </div>
+            </div>
+        </body>
+</html>

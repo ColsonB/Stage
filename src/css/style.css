@@ -1,0 +1,43 @@
+table{
+    position: relative;
+    width: 90%;
+    border: 1px solid;
+    border-color: white;
+    border-collapse: collapse;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table th{
+    font-size: bold;
+    border: 1px solid;
+    border-color: #222;
+    border-collapse: collapse;
+}
+
+table td{
+    text-align: center;
+    border: 1px solid;
+    border-color: #222;
+}
+
+.classement{
+    position: relative;
+    background-color: #fcfcfd;
+    border: 1px solid;
+    border-color: #202225;
+    border-radius: 5px;
+    width: 70%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (max-width: 800px) {
+    .classement{
+        width: 90%;
+    }
+} 
