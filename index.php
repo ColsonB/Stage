@@ -37,12 +37,12 @@
     $z=1;
     $j=0;
 
-    $query_distinct_method = $BDD->prepare("SELECT DISTINCT analyse FROM analyse");
+    $query_distinct_method = $BDD->prepare("SELECT DISTINCT analyse FROM analyse WHERE analyse = '%s'");
     $query_distinct_method->execute();
 
     while($distinct_method=$query_distinct_method->fetch(PDO::FETCH_NUM)){
         
-        $query_parameter = $BDD->prepare("SELECT DISTINCT parametre, resultat FROM analyse");
+        $query_parameter = $BDD->prepare("SELECT DISTINCT parametre, resultat FROM analyse WHERE analyse = '%s'");
         $query_parameter->execute();
 
         for($x=0; $x<$i; $x++){
@@ -89,19 +89,17 @@
     $j=0;
     $i++;
 
-    foreach($tab as $index=>$ligne){
-        foreach($ligne as $ind=>$valeur){
+    foreach($tab as $cle=>$ligne){
+        foreach($ligne as $key=>$valeur){
             if($ind == 0){
-                $lecture=$tab[$index][$ind];
+                $lecture = $tab[$cle][$valeur];
             }
             else{
-                $lecture=$lecture.','.$valeur;
+                $lecture = $lecture.','.$valeur;
             }
         }
-        $lecture=$lecture."\n";
+        $lecture = $lecture."\n";
         echo $lecture;
     }
-
     var_dump($tab); 
-
 ?>
