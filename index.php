@@ -6,8 +6,8 @@
     }    
     
     //Requête pour récupérer l'analyse
-    $req_analyse = $BDD->prepare('SELECT DISTINCT analyse FROM analyse WHERE echantillon ORDER BY analyse');
-    $req_analyse->execute();
+    $req = "SELECT DISTINCT analyse FROM analyse WHERE echantillon ORDER BY analyse";
+    $req_analyse = $BDD->query($req);
     $count_analyse = $req_analyse->rowCount();//Retourne le nombre de ligne
 
     $i=0;
@@ -16,9 +16,8 @@
     //FETCH_ASSOC retourne un tableau indexé par le nom de la colonne
 
         //Requête pour récupérer le paramétre de l'analyse
-        $req_parametre = $BDD->prepare("SELECT DISTINCT parametre FROM analyse WHERE analyse='nom'");
-        $req_parametre->bindParam('nom', $analyse['analyse']);
-        $req_parametre->execute();
+        $req_param = "SELECT DISTINCT parametre FROM analyse WHERE analyse='".$analyse['analyse']."'";
+        $req_parametre = $BDD->query($req_param);
 
         $count_parameter = $req_parametre->rowCount();
 
@@ -38,11 +37,12 @@
             $tab[0][$i]="Resultat";
             $i++;
   
-            }
+        }
     }
+    
     //Requête qui sert à récupérer l'échantillon
-    $las_sample = $BDD->prepare("SELECT DISTINCT echantillon FROM analyse WHERE analyse.echantillon");
-    $las_sample->execute();
+    $las_samp = "SELECT DISTINCT echantillon FROM analyse WHERE analyse.echantillon";
+    $las_sample = $BDD->query($las_samp);
     $count_sample=$las_sample->rowCount();
  
 	for($c=1;$c<$count_sample+1;$c++){	
@@ -56,19 +56,16 @@
 
     while($sample=$las_sample->fetch(PDO::FETCH_NUM)){
 
-        $tab[$z][$j]=$sample[0];
-        $j++;
+        //$tab[$z][$j]=$sample[0];
+        //$j++;
 
-        $query_distinct_analyse = $BDD->prepare("SELECT DISTINCT analyse FROM analyse WHERE echantillon='tab' ORDER BY analyse");
-        $query_distinct_analyse->bindParam('tab', $sample[0]);
-        $query_distinct_analyse->execute();
+        $query_distinct = "SELECT DISTINCT analyse FROM analyse WHERE echantillon='".$sample[0]."' ORDER BY analyse";
+        $query_distinct_analyse = $BDD->query($query_distinct);
 
         while($distinct_method=$query_distinct_analyse->fetch(PDO::FETCH_NUM)){
                 
-            $query_parameter = $BDD->prepare("SELECT parametre, resultat FROM analyse WHERE analyse='nom' AND echantillon='tab'");
-            $query_parameter->bindParam('tab', $sample[0]);
-            $query_parameter->bindParam('nom', $method[0]);
-            $query_parameter->execute();
+            $query_param = "SELECT parametre, resultat FROM analyse WHERE analyse='".$distinct_method[0]."' AND echantillon='".$sample[0]."'";
+            $query_parameter = $BDD->query($query_param);
                 
             for($x=0; $x<$i; $x++){
             
