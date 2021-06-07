@@ -6,17 +6,17 @@
     }    
     
     //Requête pour récupérer l'analyse
-    $req = "SELECT DISTINCT analyse FROM analyse WHERE echantillon ORDER BY analyse";
+    $req = "SELECT DISTINCT (analyse) FROM analyse WHERE echantillon ORDER BY analyse";
     $req_analyse = $BDD->query($req);
     $count_analyse = $req_analyse->rowCount();//Retourne le nombre de ligne
 
     $i=0;
 
-    while($analyse=$req_analyse->fetch(PDO::FETCH_ASSOC)){
+    while($analyse=$req_analyse->fetch(PDO::FETCH_ASSOC)){//Récupére les échantillons
     //FETCH_ASSOC retourne un tableau indexé par le nom de la colonne
 
         //Requête pour récupérer le paramétre de l'analyse
-        $req_param = "SELECT DISTINCT parametre FROM analyse WHERE analyse='".$analyse['analyse']."'";
+        $req_param = "SELECT DISTINCT (parametre) FROM analyse WHERE analyse='".$analyse['analyse']."'";
         $req_parametre = $BDD->query($req_param);
 
         $count_parameter = $req_parametre->rowCount();
@@ -41,7 +41,7 @@
     }
     
     //Requête qui sert à récupérer l'échantillon
-    $las_samp = "SELECT DISTINCT echantillon FROM analyse WHERE analyse.echantillon";
+    $las_samp = "SELECT DISTINCT (echantillon) FROM analyse";
     $las_sample = $BDD->query($las_samp);
     $count_sample=$las_sample->rowCount();
  
@@ -59,7 +59,7 @@
         //$tab[$z][$j]=$sample[0];
         //$j++;
 
-        $query_distinct = "SELECT DISTINCT analyse FROM analyse WHERE echantillon='".$sample[0]."' ORDER BY analyse";
+        $query_distinct = "SELECT DISTINCT (analyse) FROM analyse WHERE echantillon='".$sample[0]."' ORDER BY analyse";
         $query_distinct_analyse = $BDD->query($query_distinct);
 
         while($distinct_method=$query_distinct_analyse->fetch(PDO::FETCH_NUM)){
@@ -69,14 +69,11 @@
                 
             for($x=0; $x<$i; $x++){
             
-                if($tab_titre[$x]==$distinct_method[0] && $tab_titre[$x+1]==$distinct_method[1]){   
+                if($tab_titre[$x]==$distinct_method[0]){   
                     
                     $j=$x;
 
                     $tab[$z][$j]=$distinct_method[0];
-                    $j++;
-
-                    $tab[$z][$j]=$distinct_method[1];
                     $j++;
 
                     $tmp=$j;
@@ -93,11 +90,6 @@
                                 $tab[$z][$j]=$parametre[1];
                                 $j++;
 
-                                $tab[$z][$j]=$parametre[2];
-                                $j++;
-                                
-                                $tab[$z][$j]=$parametre[3];
-                                $j++;
                             }
                             else{
                                 $j=$j+4;
