@@ -119,7 +119,7 @@
 
     $z=1;
 
-    foreach($tab as $cle=>$ligne){//Parcour le tableau $lecture
+    foreach($tab as $cle=>$ligne){//Parcoure le tableau $lecture
         foreach($ligne as $key=>$valeur){
             if($key==0){
               $lecture = $tab[$cle][$key];
