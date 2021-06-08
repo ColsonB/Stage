@@ -12,6 +12,10 @@
 
     $i=0;
 
+        $tab_titre[$i]="Num. echantillon";
+		$tab[0][$i]="Num. echantillon";
+		$i++;
+
     //Initialisation du tableau//
 
     while($analyse=$req_analyse->fetch(PDO::FETCH_ASSOC)){//Récupére les échantillons
@@ -60,13 +64,15 @@
 
     while($sample=$las_sample->fetch(PDO::FETCH_NUM)){
 
-        //$tab[$z][$j]=$sample[0];
-        //$j++;
+        $tab[$z][$j]=$sample[0];
+        $j++;
 
         $query_distinct = "SELECT DISTINCT analyse FROM analyse WHERE echantillon='".$sample[0]."' ORDER BY analyse";
         $query_distinct_analyse = $BDD->query($query_distinct);
 
         while($distinct_method=$query_distinct_analyse->fetch(PDO::FETCH_NUM)){
+            
+            //Tant que $distinct_method est égale à la même analyse on remplie l'analyse avec son paramétre 
                 
             $query_param = "SELECT parametre, resultat FROM analyse WHERE analyse='".$distinct_method[0]."' AND echantillon='".$sample[0]."'";
             $query_parameter = $BDD->query($query_param);
