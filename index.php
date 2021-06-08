@@ -12,6 +12,8 @@
 
     $i=0;
 
+    //Initialisation du tableau//
+
     while($analyse=$req_analyse->fetch(PDO::FETCH_ASSOC)){//Récupére les échantillons
     //FETCH_ASSOC retourne un tableau indexé par le nom de la colonne
 
@@ -54,6 +56,8 @@
     $z=1;
     $j=0;
 
+    //Remplissage du tableau//
+
     while($sample=$las_sample->fetch(PDO::FETCH_NUM)){
 
         //$tab[$z][$j]=$sample[0];
@@ -80,7 +84,7 @@
 
                     while($parametre=$query_parameter->fetch(PDO::FETCH_NUM)){
                     
-                        while($tab[0][$j]=="Parametre"){//Remplie le tableau avec les paramétres et les résultats
+                        if($tab[0][$j]=="Parametre"){//Remplie le tableau avec les paramétres et les résultats
 
                             if($tab_titre[$j]==$parametre[0]){
                                 
