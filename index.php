@@ -6,7 +6,7 @@
     }    
     
     //Requête pour récupérer l'analyse
-    $req = "SELECT DISTINCT (analyse) FROM analyse WHERE echantillon ORDER BY analyse";
+    $req = "SELECT DISTINCT analyse FROM analyse ORDER BY analyse";
     $req_analyse = $BDD->query($req);
     $count_analyse = $req_analyse->rowCount();//Retourne le nombre de ligne
 
@@ -18,7 +18,7 @@
     //FETCH_ASSOC retourne un tableau indexé par le nom de la colonne
 
         //Requête pour récupérer le paramétre de l'analyse
-        $req_param = "SELECT DISTINCT (parametre) FROM analyse WHERE analyse='".$analyse['analyse']."'";
+        $req_param = "SELECT DISTINCT parametre FROM analyse WHERE analyse='".$analyse['analyse']."'";
         $req_parametre = $BDD->query($req_param);
 
         $count_parameter = $req_parametre->rowCount();
@@ -43,7 +43,7 @@
     }
     
     //Requête qui sert à récupérer l'échantillon
-    $las_samp = "SELECT DISTINCT (echantillon) FROM analyse";
+    $las_samp = "SELECT DISTINCT echantillon FROM analyse";
     $las_sample = $BDD->query($las_samp);
     $count_sample=$las_sample->rowCount();
  
@@ -63,7 +63,7 @@
         //$tab[$z][$j]=$sample[0];
         //$j++;
 
-        $query_distinct = "SELECT DISTINCT (analyse) FROM analyse WHERE echantillon='".$sample[0]."' ORDER BY analyse";
+        $query_distinct = "SELECT DISTINCT analyse FROM analyse WHERE echantillon='".$sample[0]."' ORDER BY analyse";
         $query_distinct_analyse = $BDD->query($query_distinct);
 
         while($distinct_method=$query_distinct_analyse->fetch(PDO::FETCH_NUM)){
@@ -96,7 +96,7 @@
 
                             }
                             else{
-                                $j=$j+4;
+                                $j=$j+2;
                             }
                         }
                             $j=$tmp;
@@ -104,10 +104,10 @@
                 }    
             }
         }
-    } 
 
-    $j=0;
-    $z++;
+        $j=0;
+        $z++;
+    }
 
     $filename = 'file.csv';
 
