@@ -12,9 +12,15 @@
         Write-Host $objExcelSheetOpen.cells.Item($i, 3).text
         Write-Host $objExcelSheetOpen.cells.Item($i, 4).text
 
+        if($objExcelSheetOpen.cells.Item($i, 3).text -eq ""){
+
+            $objExcelSheetOpen.cells.Item(3, 3) = "X"
+
+        }
+
     }
 
-    $objExcelSheetOpen.cells.Item(1, 5) = 'X' # Mets une croix dans la ligne 1 colonne 5
+    # $objExcelSheetOpen.cells.Item(1, 5) = 'X' # Mets une croix dans la ligne 1 colonne 5
 
     $objExcelFileOpen.close() # On ferme le fichier Excel
     $objExcel.Quit()
