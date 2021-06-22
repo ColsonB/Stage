@@ -1,9 +1,11 @@
     $PathExcelSrc = "C:\Users\Obsti\Documents\test.xlsx"
     $Sheet = "Feuil1"
+    $Sheet1 = "Feuil2"
 
     $objExcel = New-Object -ComObject Excel.Application
     $objExcelFileOpen = $objExcel.Workbooks.Open($PathExcelSrc) # Ouverture du fichier Excel
-    $objExcelSheetOpen = $objExcelFileOpen.sheets.item($Sheet)
+    $objExcelSheetOpen = $objExcelFileOpen.sheets.item($Sheet) 
+    $objExcelSheetOpen = $objExcelFileOpen.sheets.item($Sheet1)
 
     for($i=1; $i -le 4; $i++){ # On parcourt les 4 lignes du tableau
 
