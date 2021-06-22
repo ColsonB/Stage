@@ -12,8 +12,8 @@
         Write-Host $objExcelSheetOpen.cells.Item($i, 3).text
         Write-Host $objExcelSheetOpen.cells.Item($i, 4).text
 
-        if($objExcelSheetOpen.cells.Item($i, 1).text -eq ""){
-            if($objExcelSheetOpen.cells.Item(2, 1).text -eq ""){
+        if($objExcelSheetOpen.cells.Item($i, 1).text -eq ""){ # Vérifie si une case n'est pas vide dans la premiére colonne
+            if($objExcelSheetOpen.cells.Item(2, 1).text -eq ""){ # Si la case 2 dans la premiére colonne est vide on mets une croix
                 $objExcelSheetOpen.cells.Item(2, 1) = "X"  
             }
             if($objExcelSheetOpen.cells.Item(3, 1).text -eq ""){
